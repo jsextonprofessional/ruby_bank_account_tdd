@@ -5,23 +5,24 @@ RSpec.describe BankAccount do
     end
 
     it 'Has a getter method for retrieving the checking account balance' do
-        @bank_account1.view_checking_balance
-        expect(@bank_account1.view_checking_balance).to eq(nil)
+        expect(@bank_account1.checking_balance).to eq(0)
     end 
 
     it 'Has a getter method that retrieves the total account balance' do
-        expect(@bank_account1.view_total_balance).to eq(nil)
+        expect(@bank_account1.total_balance).to eq(0)
     end
 
-    it 'Raises an error if a user tries to withdraw more money than they have in the account' do
-        expect(@bank_account1.withdraw_from_checking(20)).to eq("Insufficient Funds")
+    context "Making a withdrawal" do
+        it 'Raises an error if user tries to withdraw more money than they have in the account' do
+            expect{ @bank_account1.withdraw_from_checking(20) }.to raise_error("Insufficient Funds")
+        end
     end
 
     it 'Raises an error when the user attempts to retrieve the total number of bank accounts' do
-        expect(@bank_account1.self.view_all_accounts). eq(nil)
+        expect{ @bank_account1.view_all_accounts }.to raise_error(NoMethodError)
     end
 
     it 'Raises an error when the user attempts to set the interest rate' do
-        expect(@bank_account1.)
+        expect{ @bank_account1.interest_rate }.to raise_error(NoMethodError)
     end
 end

@@ -1,6 +1,6 @@
 class BankAccount
     # users should not be able to set any attributes from the bank account class 
-    attr_reader :account_number, :checking_balance, :savings_balance
+    attr_reader :account_number, :checking_balance, :savings_balance, :total_balance
 
     @@all_accounts = 0
 
@@ -11,6 +11,7 @@ class BankAccount
         @account_number = generate_account_number
         @checking_balance = 0
         @savings_balance = 0
+        @total_balance = @checking_balance + @savings_balance
         # add interest_rate attribute inaccessible by the user, set to 0.01
         @interest_rate = 0.01
     end
@@ -42,7 +43,7 @@ class BankAccount
     # return error if insufficient funds
     def withdraw_from_checking(withdrawal)
         if @checking_balance - withdrawal < 0
-            puts "Insufficient Funds"
+            raise "Insufficient Funds"
         else
             @checking_balance -= withdrawal
         end
